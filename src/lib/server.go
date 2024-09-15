@@ -13,8 +13,9 @@ func handleConnection(conn net.Conn) {
 	var hash string
 	fmt.Fscanf(conn, "%s\n", &hash)
 
-	directory := "/tmp/alguma_coisa"
+	directory := "./"
 	found, err := helpers.FindHash(hash, directory)
+	fmt.Println(found)
 	if err != nil {
 		fmt.Fprintf(conn, "error: %v\n", err)
 		return

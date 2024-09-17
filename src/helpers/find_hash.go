@@ -12,9 +12,11 @@ func FindHash(hash string, directory string) (bool, error) {
 		if err != nil {
 			return err
 		}
+		fmt.Print(directory)
+		fmt.Print(path)
 		if !info.IsDir() {
 			calculatedHash, err := Sum(path)
-			fmt.Print(calculatedHash, hash)
+			fmt.Print("\ncalculatedhash: ", calculatedHash)
 			if err != nil {
 				return err
 			}

@@ -1,36 +1,29 @@
 package helpers
 
 import (
-	"io"
-	"os"
+	"fmt"
+	"io/ioutil"
 )
 
 func Sum(filePath string) (int, error) {
-	file, err := os.Open(filePath)
+	data, err := readFile(filePath)
 	if err != nil {
 		return 0, err
 	}
-	defer file.Close()
 
-	sum := 0
-	buf := make([]byte, 1024) // Lê o arquivo em blocos de 1024 bytes
-
-	for {
-		n, err := file.Read(buf)
-		if err != nil && err != io.EOF {
-			return 0, err
-		}
-		if n == 0 {
-			break
-		}
-
-		// Processa os bytes lidos
-		for _, b := range buf[:n] {
-			if b >= '0' && b <= '9' { // Verifica se é um dígito
-				sum += int(b - '0') // Converte o byte para o número e soma
-			}
-		}
+	_sum := 0
+	for _, b := range data {
+		_sum += int(b)
 	}
 
-	return sum, nil
+	return _sum, nil
+}
+
+func readFile(filePath string) ([]byte, error) {
+	data, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Printf("Error reading file %s: %v", filePath, err)
+		return nil, err
+	}
+	return data, nil
 }

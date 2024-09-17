@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strings"
 )
 
 // Função para conectar ao servidor e enviar o hash
@@ -43,6 +44,8 @@ func main() {
 
 	for _, server := range servers {
 		response, err := checkHashOnServer(server.ip, server.port, hash)
+		response = strings.TrimSpace(response)
+		fmt.Printf("Resposta do servidor: '%s' a \n", response)
 		if err != nil {
 			fmt.Printf("Erro ao conectar ao servidor %s:%s: %v\n", server.ip, server.port, err)
 			continue

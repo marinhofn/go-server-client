@@ -45,16 +45,14 @@ func main() {
 	for _, server := range servers {
 		response, err := checkHashOnServer(server.ip, server.port, hash)
 		response = strings.TrimSpace(response)
-		fmt.Printf("Resposta do servidor: '%s' a \n", response)
+		
 		if err != nil {
 			fmt.Printf("Erro ao conectar ao servidor %s:%s: %v\n", server.ip, server.port, err)
 			continue
 		}
-
-		if response == "found\n" {
-			fmt.Printf("Arquivo encontrado no servidor %s:%s\n", server.ip, server.port)
-		} else {
-			fmt.Printf("Arquivo não encontrado no servidor %s:%s\n", server.ip, server.port)
+	
+		if response == "found" {
+			fmt.Printf("%s:%s\n", server.ip, server.port)
 		}
 	}
 }

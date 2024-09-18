@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strings"
 )
 
 // Função para conectar ao servidor e enviar o hash
@@ -36,22 +37,22 @@ func main() {
 		ip   string
 		port string
 	}{
-		{"127.0.0.1", "9001"},
-		{"127.0.0.1", "9002"},
-		{"127.0.0.1", "9003"},
+		{"150.165.42.115", "9000"},
+		{"150.165.42.114", "9000"},
+		{"150.165.42.113", "9000"}, 
 	}
 
 	for _, server := range servers {
 		response, err := checkHashOnServer(server.ip, server.port, hash)
+		response = strings.TrimSpace(response)
+		
 		if err != nil {
 			fmt.Printf("Erro ao conectar ao servidor %s:%s: %v\n", server.ip, server.port, err)
 			continue
 		}
-
-		if response == "found\n" {
-			fmt.Printf("Arquivo encontrado no servidor %s:%s\n", server.ip, server.port)
-		} else {
-			fmt.Printf("Arquivo não encontrado no servidor %s:%s\n", server.ip, server.port)
+	
+		if response == "found" {
+			fmt.Printf("%s:%s\n", server.ip, server.port)
 		}
 	}
 }

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"go-cliente-servidor/src/helpers"
 	"net"
 	"os"
-	"go-cliente-servidor/src/helpers"
 )
 
 func handleConnection(conn net.Conn) {
@@ -13,7 +13,7 @@ func handleConnection(conn net.Conn) {
 	var hash string
 	fmt.Fscanf(conn, "%s\n", &hash)
 
-	directory := "./"
+	directory := "./tmp"
 	found, err := helpers.FindHash(hash, directory)
 	fmt.Println(found)
 	if err != nil {

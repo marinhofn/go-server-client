@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 )
 
 func FindHash(hash string, directory string) (bool, error) {
@@ -13,10 +14,11 @@ func FindHash(hash string, directory string) (bool, error) {
 		}
 		if !info.IsDir() {
 			calculatedHash, err := Sum(path)
+			fmt.Print("\ncalculatedhash: ", calculatedHash)
 			if err != nil {
 				return err
 			}
-			if calculatedHash == hash {
+			if strconv.Itoa(calculatedHash) == hash {
 				return fmt.Errorf("found")
 			}
 		}

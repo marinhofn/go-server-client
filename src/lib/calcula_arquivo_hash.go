@@ -13,11 +13,12 @@ func main() {
     }
 
     filePath := os.Args[1]
-    hash, err := helpers.SumStringFile(filePath)
+    hash, err := helpers.Sum(filePath)
     if err != nil {
         fmt.Printf("Erro ao calcular o hash: %v\n", err)
         return
     }
 
-    fmt.Printf("Hash do arquivo %s: %s\n", filePath, hash)
+    fmt.Print("Hash do arquivo: ", hash)
+    fmt.Print("\n")
 }

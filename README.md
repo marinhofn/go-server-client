@@ -1,3 +1,4 @@
+Este repositório é um simulador de transferência de arquivos de maneira peer-to-peer. Os arquivos que você está disposto a compartilhar devem estar na pasta 'tmp/dataset'. Disponibilizamos 3 funções principais:
 
 ### Para rodar o código do servidor
 
@@ -8,17 +9,11 @@ go run src/lib/server.go {porta_desejada}
 ### Para rodar o código do cliente:
 
 ```bash
-go run src/lib/client.go search ae5e34f70239c2d2634ec7780f38d526a797a2b0095b1128cb4a066b0be110c1
+go run src/lib/client.go search {hash_do_arquivo}
 ```
 
-
-
-### Ao mudar o arquivo do cliente ou servidor é necessário buildar o arquivo, para isso:
+### Para calcular o hash de um arquivo:
 
 ```bash
-go build -o bin/server src/lib/server.go
-```
-
-```bash
-go build -o bin/client src/lib/client.go
+go run src/lib/calcula_arquivo_hash.go {caminho_do_arquivo}
 ```
